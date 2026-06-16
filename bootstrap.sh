@@ -29,7 +29,7 @@ detect_pm() {
 install_packages() {
   local pm
   pm=$(detect_pm)
-  local pkgs=(stow zsh tmux git curl ca-certificates build-essential pkg-config libssl-dev)
+  local pkgs=(stow zsh tmux git curl ca-certificates build-essential pkg-config libssl-dev ripgrep)
   log "Installing system packages via $pm: ${pkgs[*]}"
   case "$pm" in
     apt)    $SUDO apt-get update -qq && DEBIAN_FRONTEND=noninteractive $SUDO apt-get install -y "${pkgs[@]}" ;;
