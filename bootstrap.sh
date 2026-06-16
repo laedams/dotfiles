@@ -30,12 +30,13 @@ install_packages() {
   local pm
   pm=$(detect_pm)
   local pkgs=(stow zsh tmux git curl ca-certificates build-essential pkg-config libssl-dev ripgrep)
+  local linux_pkgs=(wl-clipboard)
   log "Installing system packages via $pm: ${pkgs[*]}"
   case "$pm" in
-    apt)    $SUDO apt-get update -qq && DEBIAN_FRONTEND=noninteractive $SUDO apt-get install -y "${pkgs[@]}" ;;
-    dnf)    $SUDO dnf install -y "${pkgs[@]}" ;;
-    pacman) $SUDO pacman -S --noconfirm --needed "${pkgs[@]}" ;;
-    zypper) $SUDO zypper install -y "${pkgs[@]}" ;;
+    apt)    $SUDO apt-get update -qq && DEBIAN_FRONTEND=noninteractive $SUDO apt-get install -y "${pkgs[@]}" "${linux_pkgs[@]}" ;;
+    dnf)    $SUDO dnf install -y "${pkgs[@]}" "${linux_pkgs[@]}" ;;
+    pacman) $SUDO pacman -S --noconfirm --needed "${pkgs[@]}" "${linux_pkgs[@]}" ;;
+    zypper) $SUDO zypper install -y "${pkgs[@]}" "${linux_pkgs[@]}" ;;
     brew)   brew install "${pkgs[@]}" ;;
   esac
 }
